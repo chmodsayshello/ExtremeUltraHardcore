@@ -1,0 +1,6 @@
+name: ExtremeUltraHardcore
+version: '${project.version}'
+main: chmodsayshello.extremeultrahardcore.ExtremeUltraHardcore
+api-version: 1.18
+authors: [ chmodsayshello ]
+description: Make Minecraft Hard Again
