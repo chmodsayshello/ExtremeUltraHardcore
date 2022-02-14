@@ -1,6 +1,10 @@
 # ExtremeUltraHardcore
 This is just another challange to make Minecraft close to impossible
 
+Prebuilt Jars
+--
+https://github.com/chmodsayshello/ExtremeUltraHardcore/releases
+
 What does this callange do?
 --
 
