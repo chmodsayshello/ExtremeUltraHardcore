@@ -42,4 +42,3 @@ What does this callange do?
 
 -Ghast explosions are just ... try it on yourself
 
--Players can't wear gold armor
