@@ -250,6 +250,7 @@ public final class ExtremeUltraHardcore extends JavaPlugin implements Listener {
 
         }
     }
+    
     @EventHandler
     public void oncrash(ProjectileHitEvent e) {
         Entity fireball = e.getEntity();
@@ -260,28 +261,6 @@ public final class ExtremeUltraHardcore extends JavaPlugin implements Listener {
         }
     }
 
-    @EventHandler
-    public void onArmor(InventoryMoveItemEvent e){
-        ItemStack inv = e.getItem();
-        if(inv.getType() == Material.GOLDEN_HELMET){
-            e.setCancelled(true);
-        }
-        else{
-            if(inv.getType() == Material.GOLDEN_BOOTS){
-                e.setCancelled(true);
-            }
-            else{
-                if(inv.getType() ==Material.GOLDEN_CHESTPLATE){
-                    e.setCancelled(true);
-                }
-                else{
-                    if(inv.getType() ==Material.GOLDEN_LEGGINGS){
-                        e.setCancelled(true);
-                    }
-                }
-            }
-        }
-    }
 
     public void onDisable() {
         // Plugin shutdown logic
