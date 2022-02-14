@@ -1,3 +1,4 @@
+//The only reason i have all the EventListeners in the main class is because everything the plugin does is controlled by them
 package chmodsayshello.extremeultrahardcore;
 
 
@@ -32,7 +33,7 @@ public final class ExtremeUltraHardcore extends JavaPlugin implements Listener {
 
     public void onEnable() {
         this.getServer().getPluginManager().registerEvents(this, this);
-        getLogger().info("Die Challange wurde gestarted");
+        getLogger().info("Started challange");
         // Plugin startup logic
 
     }
@@ -58,14 +59,14 @@ public final class ExtremeUltraHardcore extends JavaPlugin implements Listener {
     @EventHandler
     public void onsleep(PlayerBedEnterEvent e) {
         org.bukkit.entity.Player p = e.getPlayer();
-        p.sendMessage("In versions before Beta 1.2, people could live without bed too, but here you go, i will give you the respawn point at least");
+        p.sendMessage("No sleep tonight!");
         e.setCancelled(true); //Verhindert effektiv die Nutzung des Bettes
     }
 
     @EventHandler
     public void enchant(EnchantItemEvent e){
         Player p =e.getEnchanter();
-        p.sendMessage("Enchanting is way to op and complicaed for you!");
+        p.sendMessage("Enchanting is way too op and complicaed for you!");
         e.setCancelled(true);
     }
 
@@ -82,7 +83,7 @@ public final class ExtremeUltraHardcore extends JavaPlugin implements Listener {
     @EventHandler
     public void ontrade(PlayerTradeEvent e){
         Player p = e.getPlayer();
-        p.sendMessage("In versions before RELEASE 1.3, people could live without trading too!");
+        p.sendMessage("Well, I don't know what to say, no trading, I guess...");
         e.setCancelled(true);
     }
 
