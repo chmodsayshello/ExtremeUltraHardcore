@@ -66,7 +66,7 @@ public final class ExtremeUltraHardcore extends JavaPlugin implements Listener {
     @EventHandler
     public void enchant(EnchantItemEvent e){
         Player p =e.getEnchanter();
-        p.sendMessage("Enchanting is way too op and complicaed for you!");
+        p.sendMessage("Enchanting is way too op and complicated for you!");
         e.setCancelled(true);
     }
 
