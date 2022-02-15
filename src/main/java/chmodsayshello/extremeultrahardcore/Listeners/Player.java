@@ -20,35 +20,35 @@ public class Player implements Listener {
         event.setCancelled(true);
     }
     @EventHandler
-    public void oneat(PlayerItemConsumeEvent e){
+    public void oneat(PlayerItemConsumeEvent event){
         int upper = 4;
         Random random = new Random();
         if (random.nextInt(upper - 0) >1) {
-            org.bukkit.entity.Player p = e.getPlayer();
+            org.bukkit.entity.Player p = event.getPlayer();
             p.sendMessage("You always wolf down your food like that! Try it again slower and enjoy it.");
-            e.setCancelled(true);
+            event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onshot(EntityShootBowEvent e){
-        if (e.getEntity() instanceof org.bukkit.entity.Player){
+    public void onshot(EntityShootBowEvent event){
+        if (event.getEntity() instanceof org.bukkit.entity.Player){
             int upper = 4;
             Random random = new Random();
             if (random.nextInt(upper - 0) >1) {
-                org.bukkit.entity.Player p = ((org.bukkit.entity.Player) e.getEntity()).getPlayer();
+                org.bukkit.entity.Player p = ((org.bukkit.entity.Player) event.getEntity()).getPlayer();
                 p.sendMessage("Oh man, you're always in such a hurry and you don't even draw your bow correctly, you have to shoot the arrow again.");
-                e.setCancelled(true);
+                event.setCancelled(true);
             }
         }
     }
 
     @EventHandler
-    public void onsprint(PlayerToggleSprintEvent e) {
+    public void onsprint(PlayerToggleSprintEvent event) {
         int upper = 2;
         Random random = new Random();
         if (random.nextInt(upper - 0) ==1){
-            org.bukkit.entity.Player p = e.getPlayer();
+            org.bukkit.entity.Player p = event.getPlayer();
             p.sendMessage("Have you really forgot that you felt very ill this morning and your doctor said no sport?");
             p.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 1800, 1));
             p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1800, 1));
