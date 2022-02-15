@@ -127,12 +127,12 @@ public class Mob implements Listener {
         }
     }
     @EventHandler
-    public void oncrash(ProjectileHitEvent e) {
-        Entity fireball = e.getEntity();
+    public void oncrash(ProjectileHitEvent event) {
+        Entity fireball = event.getEntity();
         if(fireball instanceof Fireball){
             Location loc = fireball.getLocation();
             fireball.getWorld().createExplosion(loc,100F);
-            e.setCancelled(true);
+            event.setCancelled(true);
         }
     }
 }
