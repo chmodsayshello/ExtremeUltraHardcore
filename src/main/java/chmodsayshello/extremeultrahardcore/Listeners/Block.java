@@ -60,13 +60,13 @@ public class Block implements Listener {
     }
 
     @EventHandler
-    public void onplace(BlockPlaceEvent e) {
+    public void onplace(BlockPlaceEvent event) {
         int upper = 2;
         Random random = new Random();
         if (random.nextInt(upper - 0) ==1) {
-            org.bukkit.entity.Player p = e.getPlayer();
+            org.bukkit.entity.Player p = event.getPlayer();
             p.sendMessage("CAUTION: Your block just melted somehow?!");
-            Location loc= e.getBlock().getLocation();
+            Location loc= event.getBlock().getLocation();
             loc.getBlock().setType(Material.LAVA);
         }
     }
