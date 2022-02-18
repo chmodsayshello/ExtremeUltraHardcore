@@ -8,14 +8,19 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+
 
 public class Mob implements Listener {
     @EventHandler
     public void onspawn(CreatureSpawnEvent event){
         if (event.getEntity() instanceof Creeper){
             ((Creeper) event.getEntity()).setPowered(true);
+            ((Creeper) event.getEntity()).setExplosionRadius(50);
+            event.getEntity().setInvulnerable(true);
+            event.getEntity().setCustomName("Boom!");
         }
         else{
             if(event.getEntity() instanceof Zombie) {
@@ -24,6 +29,7 @@ public class Mob implements Listener {
                 ItemStack Zombiechestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
                 ItemStack Zombiehelmet = new ItemStack(Material.DIAMOND_HELMET);
                 ItemStack Zombiesword = new ItemStack(Material.DIAMOND_SWORD);
+                ItemStack Zombietotem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
                 Zombieboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
                 Zombieleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
                 Zombiechestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -34,6 +40,7 @@ public class Mob implements Listener {
                 ((Zombie) event.getEntity()).getEquipment().setChestplate(Zombiechestplate);
                 ((Zombie) event.getEntity()).getEquipment().setHelmet(Zombiehelmet);
                 ((Zombie) event.getEntity()).getEquipment().setItemInMainHand(Zombiesword);
+                ((Zombie) event.getEntity()).getEquipment().setItemInOffHand(Zombietotem);
                 ((Zombie) event.getEntity()).getEquipment().setBootsDropChance(0);
                 ((Zombie) event.getEntity()).getEquipment().setLeggingsDropChance(0);
                 ((Zombie) event.getEntity()).getEquipment().setChestplateDropChance(0);
@@ -52,6 +59,7 @@ public class Mob implements Listener {
                     ItemStack Skeletonchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
                     ItemStack Skeletonhelmet = new ItemStack(Material.DIAMOND_HELMET);
                     ItemStack Skeletonbow = new ItemStack(Material.BOW);
+                    ItemStack Skeletontotem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
                     Skeletonboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
                     Skeletonleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
                     Skeletonchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -62,6 +70,7 @@ public class Mob implements Listener {
                     ((Skeleton) event.getEntity()).getEquipment().setChestplate(Skeletonchestplate);
                     ((Skeleton) event.getEntity()).getEquipment().setHelmet(Skeletonhelmet);
                     ((Skeleton) event.getEntity()).getEquipment().setItemInMainHand(Skeletonbow);
+                    ((Skeleton) event.getEntity()).getEquipment().setItemInOffHand(Skeletontotem);
                     ((Skeleton) event.getEntity()).getEquipment().setBootsDropChance(0);
                     ((Skeleton) event.getEntity()).getEquipment().setLeggingsDropChance(0);
                     ((Skeleton) event.getEntity()).getEquipment().setChestplateDropChance(0);
@@ -102,8 +111,10 @@ public class Mob implements Listener {
                     else{
                         if(event.getEntity() instanceof WitherSkeleton){
                             ItemStack Witherskelsword = new ItemStack(Material.NETHERITE_SWORD);
+                            ItemStack Witherskeltotem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
                             Witherskelsword.addEnchantment(Enchantment.DAMAGE_ALL, 5);
                             ((WitherSkeleton) event.getEntity()).getEquipment().setItemInMainHand(Witherskelsword);
+                            ((WitherSkeleton) event.getEntity()).getEquipment().setItemInOffHand(Witherskeltotem);
                             ((WitherSkeleton) event.getEntity()).getEquipment().setItemInMainHandDropChance(0);
                         }
                         else{
@@ -119,6 +130,20 @@ public class Mob implements Listener {
                                     event.getEntity().getWorld().spawnEntity(event.getEntity().getLocation().add(0,1,0), EntityType.VEX);
                                     event.getEntity().remove();
                                 }
+                                else{
+                                    if(event.getEntity() instanceof  Phantom){
+                                        Location loc = event.getLocation();
+                                        Creeper creep = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
+                                        event.getEntity().setPassenger(creep);
+                                    }
+                                    else{
+                                        if(event.getEntity() instanceof Vex){
+                                            Location loc = event.getLocation();
+                                            Creeper creep = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
+                                            event.getEntity().setPassenger(creep);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -133,6 +158,15 @@ public class Mob implements Listener {
             Location loc = fireball.getLocation();
             fireball.getWorld().createExplosion(loc,100F);
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void death(EntityDeathEvent event){
+        if(event.getEntity() instanceof Creeper){
+            Creeper deadcreep = (Creeper) event.getEntity();
+            Location loc = deadcreep.getLocation();
+            deadcreep.getWorld().createExplosion(loc, 100F);
         }
     }
 }
