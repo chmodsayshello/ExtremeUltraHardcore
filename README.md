@@ -46,3 +46,12 @@ What does this callange do?
 
 -Ghast explosions are just ... try it on yourself
 
+-Zombies, Skeletons and Witherskeletons have 64 Totems in their offhand
+
+-Creepers have an extreme explosion
+
+-Creepers explode on death
+
+-Creepers are on phantoms and vexes
+
+-Creepers only can take damage from direct attacks
