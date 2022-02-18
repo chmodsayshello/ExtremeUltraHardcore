@@ -10,7 +10,7 @@ What does this callange do?
 
 -There is a 25% chance for a broken block to simply don't break
 
--There is a 0.008% chance for the player to get Mining Fatigue after breaking a block
+-There is a 0.8% chance for the player to get Mining Fatigue after breaking a block
 
 -Beds don't work
 
