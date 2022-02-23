@@ -1,9 +1,12 @@
 package chmodsayshello.extremeultrahardcore.Listeners;
 
 import io.papermc.paper.event.player.PlayerTradeEvent;
+import org.bukkit.Location;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.potion.PotionEffect;
@@ -53,6 +56,23 @@ public class Player implements Listener {
             p.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 1800, 1));
             p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1800, 1));
 
+        }
+    }
+
+    @EventHandler
+    public void onfish(PlayerFishEvent event){
+        org.bukkit.entity.Player p = event.getPlayer();
+        Location ploc = p.getLocation();
+        Location loc = event.getCaught().getLocation();
+        LightningStrike strike = (LightningStrike) p.getWorld().spawnEntity(ploc, EntityType.LIGHTNING);
+        p.sendMessage("He said 'You are more likely to be struck by lightning before you hit the jackpot in the lottery!', should I play the lottery now?");
+        int upper = 4;
+        Random random = new Random();
+        if(random.nextInt(upper - 1) == 1){
+            Ravager ravager = (Ravager) p.getWorld().spawnEntity(ploc, EntityType.RAVAGER);
+            ElderGuardian elder = (ElderGuardian) p.getWorld().spawnEntity(ploc, EntityType.ELDER_GUARDIAN);
+            ravager.setPassenger(elder);
+            p.sendMessage("RUN!");
         }
     }
 }
