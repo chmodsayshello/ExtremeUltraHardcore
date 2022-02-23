@@ -55,3 +55,7 @@ What does this callange do?
 -Creepers are on phantoms and vexes
 
 -Creepers only can take damage from direct attacks
+
+-Player gets struck by lightning upon fishing
+
+-There is a 25% change for a ravanger with an elder guardian as passenger to spawn upon fishing
