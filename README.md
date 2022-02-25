@@ -59,3 +59,13 @@ What does this callange do?
 -Player gets struck by lightning upon fishing
 
 -There is a 25% change for a ravanger with an elder guardian as passenger to spawn upon fishing
+
+-Anvils and Smithing Tables explode on usage
+
+-All raiders are riding an ravanger during raids, including ravangers!
+
+-Evokers are riding on all raiders, including evokers
+
+-All raiders have 64 totems in their offhand
+
+-All raiders can only take damage by direct attacks
