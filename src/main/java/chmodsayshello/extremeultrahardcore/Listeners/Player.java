@@ -2,11 +2,13 @@ package chmodsayshello.extremeultrahardcore.Listeners;
 
 import io.papermc.paper.event.player.PlayerTradeEvent;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.potion.PotionEffect;
@@ -26,6 +28,12 @@ public class Player implements Listener {
     public void oneat(PlayerItemConsumeEvent event){
         int upper = 4;
         Random random = new Random();
+        if(event.getItem().getType() == Material.MILK_BUCKET){
+            org.bukkit.entity.Player p = event.getPlayer();
+            p.sendMessage("Nah, it really is not healthy to drink 1000 liters of milk...");
+            event.setCancelled(true);
+        }
+
         if (random.nextInt(upper - 0) >1) {
             org.bukkit.entity.Player p = event.getPlayer();
             p.sendMessage("You always wolf down your food like that! Try it again slower and enjoy it.");
@@ -73,6 +81,25 @@ public class Player implements Listener {
             ElderGuardian elder = (ElderGuardian) p.getWorld().spawnEntity(ploc, EntityType.ELDER_GUARDIAN);
             ravager.setPassenger(elder);
             p.sendMessage("RUN!");
+        }
+    }
+
+    @EventHandler
+    public void onride(PlayerInteractEntityEvent event){
+        Entity e = event.getRightClicked();
+        org.bukkit.entity.Player p = event.getPlayer();
+        Location loc = e.getLocation();
+        if (e instanceof Horse || e instanceof Donkey || e instanceof Mule || e instanceof Llama){
+            p.sendMessage("Oh no, that was a Trojan horse!");
+            for(int i = 0; i < 10; ++i){
+                Zombie zombie = (Zombie) e.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+                Skeleton skeleton = (Skeleton) e.getWorld().spawnEntity(loc, EntityType.SKELETON);
+                Illusioner illusioner = (Illusioner) e.getWorld().spawnEntity(loc, EntityType.ILLUSIONER);
+                zombie.setInvulnerable(true);
+                skeleton.setInvulnerable(true);
+                illusioner.setInvulnerable(true);
+                event.setCancelled(true);
+            }
         }
     }
 }

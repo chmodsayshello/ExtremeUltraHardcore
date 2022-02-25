@@ -69,3 +69,11 @@ What does this callange do?
 -All raiders have 64 totems in their offhand
 
 -All raiders can only take damage by direct attacks
+
+-Spiders are too fast for their AI, just for fun
+
+-Upon clicking a horse, donkey, mule or llama, 10 Zombies, 10 Skeletons and 10 illusioner will spawn
+
+-Containers now explode, but not in the end
+
+-Players can't drink milk

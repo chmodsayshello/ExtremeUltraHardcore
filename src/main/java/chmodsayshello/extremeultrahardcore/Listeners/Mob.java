@@ -4,6 +4,7 @@ package chmodsayshello.extremeultrahardcore.Listeners;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Raid;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -123,7 +124,9 @@ public class Mob implements Listener {
                                 if (event.getEntity().fromMobSpawner() ==true){
                                     event.getEntity().getWorld().spawnEntity(event.getEntity().getLocation().add(0,1,0), EntityType.VEX);
                                     event.getEntity().remove();
-
+                                }
+                                else{
+                                    event.getEntity().getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(2.0D);
                                 }
                             }
                             else{
