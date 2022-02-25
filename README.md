@@ -62,7 +62,7 @@ What does this callange do?
 
 -Anvils and Smithing Tables explode on usage
 
--All raiders are riding an ravanger during raids, including ravangers!
+-All raiders are riding a ravanger during raids, including ravangers!
 
 -Evokers are riding on all raiders, including evokers
 
