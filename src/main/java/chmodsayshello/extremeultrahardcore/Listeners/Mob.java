@@ -150,6 +150,14 @@ public class Mob implements Listener {
                                                 ravager.setPassenger(event.getEntity());
                                                 Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
                                                 event.getEntity().setPassenger(evoker);
+
+                                                ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
+                                                evoker.getEquipment().setItemInOffHand(totem);
+                                                event.getEntity().getEquipment().setItemInOffHand(totem);
+
+                                                event.getEntity().setInvulnerable(true);
+                                                ravager.setInvulnerable(true);
+                                                evoker.setInvulnerable(true);
                                             }
                                             else{
                                                 if(event.getEntity() instanceof Vindicator){
@@ -158,15 +166,31 @@ public class Mob implements Listener {
                                                     ravager.setPassenger(event.getEntity());
                                                     Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
                                                     event.getEntity().setPassenger(evoker);
+
+                                                    ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
+                                                    evoker.getEquipment().setItemInOffHand(totem);
+                                                    event.getEntity().getEquipment().setItemInOffHand(totem);
+
+                                                    event.getEntity().setInvulnerable(true);
+                                                    evoker.setInvulnerable(true);
+                                                    ravager.setInvulnerable(true);
                                                 }
                                                 else{
                                                     if(event.getEntity() instanceof Evoker){
                                                         Location loc = event.getLocation();
                                                         Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
                                                         ravager.setPassenger(event.getEntity());
+                                                        ravager.setInvulnerable(true);
+                                                        event.getEntity().setInvulnerable(true);
                                                         if(event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.RAID)){
                                                             Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
                                                             event.getEntity().setPassenger(evoker);
+
+                                                            ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
+                                                            evoker.getEquipment().setItemInOffHand(totem);
+                                                            event.getEntity().getEquipment().setItemInOffHand(totem);
+
+                                                            evoker.setInvulnerable(true);
                                                         }
                                                     }
                                                     else{
@@ -175,8 +199,25 @@ public class Mob implements Listener {
                                                                 Location loc = event.getLocation();
                                                                 Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
                                                                 ravager.setPassenger(event.getEntity());
-                                                                Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
-                                                                event.getEntity().setPassenger(evoker);
+                                                                ravager.setInvulnerable(true);
+                                                                event.getEntity().setInvulnerable(true);
+                                                            }
+                                                        }
+                                                        else{
+                                                            if(event.getEntity() instanceof Witch){
+                                                                ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING, 64);
+                                                                if(event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.RAID)){
+                                                                    Location loc = event.getLocation();
+                                                                    Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
+                                                                    ravager.setPassenger(event.getEntity());
+                                                                    Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
+                                                                    event.getEntity().setPassenger(evoker);
+                                                                    evoker.getEquipment().setItemInOffHand(totem);
+                                                                    event.getEntity().setInvulnerable(true);
+                                                                    evoker.setInvulnerable(true);
+                                                                    ravager.setInvulnerable(true);
+                                                                }
+                                                                event.getEntity().getEquipment().setItemInOffHand(totem);
                                                             }
                                                         }
                                                     }
