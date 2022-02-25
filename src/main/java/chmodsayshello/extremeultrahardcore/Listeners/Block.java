@@ -2,6 +2,8 @@ package chmodsayshello.extremeultrahardcore.Listeners;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.block.data.type.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,6 +12,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.inventory.BrewEvent;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
+import org.bukkit.event.inventory.SmithItemEvent;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -69,5 +73,22 @@ public class Block implements Listener {
             Location loc= event.getBlock().getLocation();
             loc.getBlock().setType(Material.LAVA);
         }
+    }
+
+    @EventHandler
+    public void onanvil(PrepareAnvilEvent event){
+        Location loc = event.getInventory().getLocation();
+        loc.getBlock().setType(Material.AIR);
+        loc.getWorld().playSound(loc, Sound.BLOCK_ANVIL_BREAK, 3.0F, 0.5F);
+        loc.getWorld().createExplosion(loc, 100F);
+    }
+
+    @EventHandler
+    public void onsmithing(SmithItemEvent event){
+        Location loc = event.getInventory().getLocation();
+        loc.getBlock().setType(Material.AIR);
+        loc.getWorld().playSound(loc, Sound.BLOCK_WOOD_BREAK, 3.0f, 0.5f);
+        loc.getWorld().createExplosion(loc, 100F);
+        event.setCancelled(true);
     }
 }
