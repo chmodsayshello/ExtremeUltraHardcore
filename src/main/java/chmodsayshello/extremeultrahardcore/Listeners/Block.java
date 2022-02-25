@@ -18,7 +18,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.awt.event.ContainerEvent;
 import java.util.Random;
 
 public class Block implements Listener {

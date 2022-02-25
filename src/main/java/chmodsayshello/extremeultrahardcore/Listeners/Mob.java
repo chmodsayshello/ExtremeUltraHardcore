@@ -3,7 +3,6 @@ package chmodsayshello.extremeultrahardcore.Listeners;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Raid;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
