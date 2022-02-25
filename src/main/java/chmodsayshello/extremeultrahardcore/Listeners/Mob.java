@@ -3,6 +3,7 @@ package chmodsayshello.extremeultrahardcore.Listeners;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Raid;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -141,6 +142,46 @@ public class Mob implements Listener {
                                             Location loc = event.getLocation();
                                             Creeper creep = (Creeper) loc.getWorld().spawnEntity(loc, EntityType.CREEPER);
                                             event.getEntity().setPassenger(creep);
+                                        }
+                                        else{
+                                            if(event.getEntity() instanceof Pillager){
+                                                Location loc = event.getLocation();
+                                                Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
+                                                ravager.setPassenger(event.getEntity());
+                                                Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
+                                                event.getEntity().setPassenger(evoker);
+                                            }
+                                            else{
+                                                if(event.getEntity() instanceof Vindicator){
+                                                    Location loc = event.getLocation();
+                                                    Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
+                                                    ravager.setPassenger(event.getEntity());
+                                                    Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
+                                                    event.getEntity().setPassenger(evoker);
+                                                }
+                                                else{
+                                                    if(event.getEntity() instanceof Evoker){
+                                                        Location loc = event.getLocation();
+                                                        Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
+                                                        ravager.setPassenger(event.getEntity());
+                                                        if(event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.RAID)){
+                                                            Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
+                                                            event.getEntity().setPassenger(evoker);
+                                                        }
+                                                    }
+                                                    else{
+                                                        if(event.getEntity() instanceof Ravager){
+                                                            if(event.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.RAID)){
+                                                                Location loc = event.getLocation();
+                                                                Ravager ravager = (Ravager) loc.getWorld().spawnEntity(loc, EntityType.RAVAGER);
+                                                                ravager.setPassenger(event.getEntity());
+                                                                Evoker evoker = (Evoker) loc.getWorld().spawnEntity(loc, EntityType.EVOKER);
+                                                                event.getEntity().setPassenger(evoker);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
