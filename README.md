@@ -77,3 +77,11 @@ What does this callange do?
 -Containers now explode, but not in the end
 
 -Players can't drink milk
+
+-Wolves now only have 20 seconds to live before a primed TNT Block explodes in them
+
+-Sheep, Cows, Pigs and Rabbits turn into wolves
+
+-All cats have the Type "Tuxedo", the name "Katzenfisch07", and have a salmon as passenger
+
+-Phantoms are dropping TNT

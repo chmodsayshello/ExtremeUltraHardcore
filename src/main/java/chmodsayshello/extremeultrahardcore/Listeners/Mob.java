@@ -1,6 +1,7 @@
 package chmodsayshello.extremeultrahardcore.Listeners;
 
 
+import io.papermc.paper.event.entity.EntityMoveEvent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -10,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -221,6 +223,33 @@ public class Mob implements Listener {
                                                                 }
                                                                 event.getEntity().getEquipment().setItemInOffHand(totem);
                                                             }
+                                                            else{
+                                                                if(event.getEntity() instanceof  Cat){
+                                                                    Cat cat = (Cat) event.getEntity();
+                                                                    cat.setCatType(Cat.Type.BLACK);
+                                                                    cat.setCustomName("Katzenfisch07");
+                                                                    Location loc = event.getLocation();
+                                                                    Fish fish = (Fish) loc.getWorld().spawnEntity(loc, EntityType.SALMON);
+                                                                    fish.setInvulnerable(true);
+                                                                    cat.setPassenger(fish);
+                                                                }
+                                                                else{
+                                                                    if(event.getEntity() instanceof Wolf){
+                                                                        Wolf wolf = (Wolf) event.getEntity();
+                                                                        Location loc = event.getLocation();
+                                                                        TNTPrimed tnt = (TNTPrimed) loc.getWorld().spawnEntity(loc, EntityType.PRIMED_TNT);
+                                                                        tnt.setFuseTicks(20*20); //20 seconds, times 20 because one second is 20 ticks
+                                                                        wolf.setPassenger(tnt);
+                                                                    }
+                                                                    else{
+                                                                        if(event.getEntity() instanceof Sheep || event.getEntity() instanceof Cow || event.getEntity() instanceof Pig || event.getEntity() instanceof Rabbit){
+                                                                            Location loc = event.getLocation();
+                                                                            event.getEntity().remove();
+                                                                            Wolf wolf = (Wolf) loc.getWorld().spawnEntity(loc, EntityType.WOLF);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -235,6 +264,47 @@ public class Mob implements Listener {
             }
         }
     }
+
+    @EventHandler
+    public void onmove(EntityMoveEvent event){
+        if (event.getEntity() instanceof Phantom){
+            Location loc = event.getEntity().getLocation();
+            TNTPrimed tnt = (TNTPrimed) loc.getWorld().spawnEntity(loc, EntityType.PRIMED_TNT);
+            tnt.setFuseTicks(5*20);
+        }
+
+        if(event.getEntity() instanceof  Cat){
+            Cat cat = (Cat) event.getEntity();
+            if(!(cat.getCatType() == Cat.Type.BLACK)){
+                cat.setCatType(Cat.Type.BLACK);
+                cat.setCustomName("Katzenfisch07");
+                Location loc = event.getEntity().getLocation();
+                Fish fish = (Fish) loc.getWorld().spawnEntity(loc, EntityType.SALMON);
+                fish.setInvulnerable(true);
+                cat.setPassenger(fish);
+            }
+        }
+        else {
+            if (event.getEntity() instanceof Wolf) {
+                Wolf wolf = (Wolf) event.getEntity();
+                if(wolf.getPassenger() == null){
+                    Location loc = event.getEntity().getLocation();
+                    TNTPrimed tnt = (TNTPrimed) loc.getWorld().spawnEntity(loc, EntityType.PRIMED_TNT);
+                    tnt.setFuseTicks(20 * 20); //20 seconds, times 20 because one second is 20 ticks
+                    wolf.setPassenger(tnt);
+                }
+            } else {
+                if (event.getEntity() instanceof Sheep || event.getEntity() instanceof Cow || event.getEntity() instanceof Pig || event.getEntity() instanceof Rabbit) {
+                    Location loc = event.getEntity().getLocation();
+                    event.getEntity().remove();
+                    Wolf wolf = (Wolf) loc.getWorld().spawnEntity(loc, EntityType.WOLF);
+                }
+            }
+        }
+    }
+
+
+
     @EventHandler
     public void oncrash(ProjectileHitEvent event) {
         Entity fireball = event.getEntity();
