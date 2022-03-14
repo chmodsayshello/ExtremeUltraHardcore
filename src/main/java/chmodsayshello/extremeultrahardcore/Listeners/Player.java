@@ -1,5 +1,6 @@
 package chmodsayshello.extremeultrahardcore.Listeners;
 
+import chmodsayshello.extremeultrahardcore.ExtremeUltraHardcore;
 import io.papermc.paper.event.player.PlayerTradeEvent;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,16 +8,18 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.player.*;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
+
+
 public class Player implements Listener {
+
 
     @EventHandler
     public void ontrade(PlayerTradeEvent event){
@@ -100,6 +103,43 @@ public class Player implements Listener {
                 illusioner.setInvulnerable(true);
                 event.setCancelled(true);
             }
+        }else{
+            if(e instanceof Boat || e instanceof Minecart){
+                e.remove();
+            }
         }
+    }
+
+    @EventHandler
+    public void onplayermove(PlayerMoveEvent event){
+        Location loc = event.getPlayer().getLocation();
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                loc.getBlock().setType(Material.WITHER_ROSE);
+            }
+        }.runTaskLater(ExtremeUltraHardcore.getPlugin(ExtremeUltraHardcore.class), 100);
+    }
+
+    @EventHandler
+    public void onpickup(PlayerAttemptPickupItemEvent event){
+        if(event.getItem().getItemStack().equals(new ItemStack(Material.WITHER_ROSE, event.getItem().getItemStack().getAmount()))){
+            org.bukkit.entity.Player p = event.getPlayer();
+            p.sendMessage("It really hurts your hands trying to pick this rose up, so you drop it again and it suddenly disappears");
+            if(p.getHealth()-6 > 0){
+                p.setHealth(p.getHealth()-6);
+            }else{
+                p.setHealth(0);
+            }
+            event.setCancelled(true);
+            event.getItem().remove();
+        }
+    }
+
+    @EventHandler
+    public void ondrop(PlayerDropItemEvent event){
+        org.bukkit.entity.Player p = event.getPlayer();
+        p.sendMessage("Environmental polluters!");
+        event.setCancelled(true);
     }
 }

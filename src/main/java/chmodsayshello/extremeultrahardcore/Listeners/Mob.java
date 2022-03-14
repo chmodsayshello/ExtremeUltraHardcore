@@ -10,6 +10,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -121,12 +122,13 @@ public class Mob implements Listener {
                         }
                         else{
                             if(event.getEntity() instanceof Spider){
+                                Location loc = event.getLocation();
                                 if (event.getEntity().fromMobSpawner() ==true){
                                     event.getEntity().getWorld().spawnEntity(event.getEntity().getLocation().add(0,1,0), EntityType.VEX);
                                     event.getEntity().remove();
-                                }
-                                else{
+                                } else{
                                     event.getEntity().getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(2.0D);
+                                    Phantom phantom = (Phantom) loc.getWorld().spawnEntity(loc, EntityType.PHANTOM);
                                 }
                             }
                             else{
@@ -241,7 +243,7 @@ public class Mob implements Listener {
                                                                         wolf.setPassenger(tnt);
                                                                     }
                                                                     else{
-                                                                        if(event.getEntity() instanceof Sheep || event.getEntity() instanceof Cow || event.getEntity() instanceof Pig || event.getEntity() instanceof Rabbit){
+                                                                        if(event.getEntity() instanceof Sheep || event.getEntity() instanceof Cow || event.getEntity() instanceof Pig || event.getEntity() instanceof Rabbit || event.getEntity() instanceof Chicken){
                                                                             Location loc = event.getLocation();
                                                                             event.getEntity().remove();
                                                                             Wolf wolf = (Wolf) loc.getWorld().spawnEntity(loc, EntityType.WOLF);
@@ -293,7 +295,7 @@ public class Mob implements Listener {
                     wolf.setPassenger(tnt);
                 }
             } else {
-                if (event.getEntity() instanceof Sheep || event.getEntity() instanceof Cow || event.getEntity() instanceof Pig || event.getEntity() instanceof Rabbit) {
+                if (event.getEntity() instanceof Sheep || event.getEntity() instanceof Cow || event.getEntity() instanceof Pig || event.getEntity() instanceof Rabbit || event.getEntity() instanceof Chicken) {
                     Location loc = event.getEntity().getLocation();
                     event.getEntity().remove();
                     Wolf wolf = (Wolf) loc.getWorld().spawnEntity(loc, EntityType.WOLF);
@@ -302,6 +304,23 @@ public class Mob implements Listener {
         }
     }
 
+    @EventHandler
+    public void ondmg(EntityDamageEvent event){
+        if (event.getEntity() instanceof EnderDragon){
+            Location loc = event.getEntity().getLocation();
+            EnderCrystal enderCrystal = (EnderCrystal) loc.getWorld().spawnEntity(loc, EntityType.ENDER_CRYSTAL);
+        }else{
+            if (event.getEntity() instanceof WitherSkeleton){
+                Location loc = event.getEntity().getLocation();
+                Wither wither = (Wither) loc.getWorld().spawnEntity(loc, EntityType.WITHER);
+            }else{
+                if(event.getEntity() instanceof  Blaze){
+                    Location loc = event.getEntity().getLocation();
+                    loc.getBlock().setType(Material.LAVA);
+                }
+            }
+        }
+    }
 
 
     @EventHandler
