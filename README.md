@@ -80,8 +80,30 @@ What does this callange do?
 
 -Wolves now only have 20 seconds to live before a primed TNT Block explodes in them
 
--Sheep, Cows, Pigs and Rabbits turn into wolves
+-Sheep, Cows, Pigs, Chickens and Rabbits turn into wolves
 
 -All cats have the Type "Tuxedo", the name "Katzenfisch07", and have a salmon as passenger
 
 -Phantoms are dropping TNT
+
+-Breaking a wither rose causes a wither to spawn
+
+-Wither roses despawn after 15 seconds if they are in item form
+
+-Dispensing an item causes a gigantic explosion
+
+-Spiders spawn a phantom
+
+-Another End Crystal spawns if the enderdragon takes damage
+
+-A wither spawns if a witherskeleton takes damage
+
+-Blazes spawn one block of lava upon taking damage
+
+-Boats and Minecarts despawn upon someone trying to use them
+
+-The player leaves behind a wither rose trail
+
+-The player can't pickup wither roses and takes 3 hearths of damage (6hp) if he tries to
+
+-Players can't drop items
